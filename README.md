@@ -1,22 +1,26 @@
 # Motivation
+
 Prometheus storage with simple fault tolerance
 
-This is a very simple fault tolerant prometheus storage server, using a remote volume for backup and initial sync
+[131hub/prometheus-storage] is a very simple fault tolerant prometheus storage server docker container, using a remote volume for backup and initial sync
 
 This instance runs periodical snapshot and backup thems to the remote volume
 Before starting, the last remote backup is downloaded
 
-To force instant snapshot, use
+To force instant snapshot, use `docker kill -11 prometheus-storage`
 
-docker kill -11 prometheus-storage
 
+# Usage
+```
+docker run -v /data/local:/data/local -v /data/remote:/data/remote  131hub/prometheus-storage
+```
 
 
 # Configuration
 Configure using env vars
 ```
-LOCAL_VOLUME_PATH  :=/var/data/local
-REMOTE_VOLUME_PATH :=/var/data/remote
+LOCAL_VOLUME_PATH  :=/data/local
+REMOTE_VOLUME_PATH :=/data/remote
 SNAPSHOT_INTERVAL  :=120
 ```
 
