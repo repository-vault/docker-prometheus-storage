@@ -27,7 +27,7 @@ abort(){
 
 echo "Initial sync from $REMOTE_VOLUME_PATH"
 
-crash="$LOCAL_VOLUME_PATH-crash-`date +"%Y-%m-%d-%H-%m-%S"`"
+crash="$LOCAL_VOLUME_PATH-crash-`date +"%Y-%m-%d-%H-%M-%S"`"
 # first, make a backup
 cp -al "$LOCAL_VOLUME_PATH" "$crash"
 
