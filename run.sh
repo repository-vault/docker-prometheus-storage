@@ -26,7 +26,12 @@ abort(){
 
 
 echo "Initial sync from $REMOTE_VOLUME_PATH"
-rsync -av "$REMOTE_VOLUME_PATH"/ "$LOCAL_VOLUME_PATH"/
+
+crash="$LOCAL_VOLUME_PATH-crash-`date +"%Y-%m-%d-%H-%m-%S"`"
+# first, make a backup
+cp -al "$LOCAL_VOLUME_PATH" "$crash"
+
+rsync -av --delete "$REMOTE_VOLUME_PATH"/ "$LOCAL_VOLUME_PATH"/
 
 
 background_sync(){
