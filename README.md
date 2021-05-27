@@ -24,5 +24,19 @@ REMOTE_VOLUME_PATH :=/data/remote
 SNAPSHOT_INTERVAL  :=120
 ```
 
+
+# Advance usage
+
+```
+# Force sync
+docker kill -s SIGUSR1 $(docker ps -q --filter "name=prometheus")
+
+
+# restart without initial sync
+touch $LOCAL_VOLUME_PATH/nosync
+
+
+```
+
 # Credits
 * [131](https://github.com/131)
