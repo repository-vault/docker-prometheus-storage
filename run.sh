@@ -50,10 +50,12 @@ background_sync(){
 
   while true; do
   echo "Now running snapshot"
-  guid=$(curl -s -XPOST http://127.0.0.1:9090/api/v1/admin/tsdb/snapshot | jq -r '.data.name')
+  trace=$(curl -s -XPOST http://127.0.0.1:9090/api/v1/admin/tsdb/snapshot)
+  guid=$(echo -e "$trace"| jq -r '.data.name')
+
   echo "Got replication guid $guid"
   snapshot_dir="$LOCAL_VOLUME_PATH/snapshots/$guid"
-  ( [ -z "$guid" ] || [ ! -d "$snapshot_dir" ] ) && abort "Invalid snapshot"
+  ( [ -z "$guid" ] || [ ! -d "$snapshot_dir" ] ) && echo -e "$trace" && abort "Invalid snapshot"
 
   rsync -av --delete $snapshot_dir/ $REMOTE_VOLUME_PATH/
   rm -rf "$snapshot_dir"
