@@ -9,4 +9,4 @@ RUN ./install.sh
 ADD run.sh /bin/run.sh
 
 ENTRYPOINT [ "/bin/run.sh" ]
-LABEL "org.opencontainers.image.version"="1.1.0"
+LABEL "org.opencontainers.image.version"="1.1.1"
